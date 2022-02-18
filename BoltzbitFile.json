@@ -1,0 +1,91 @@
+{
+  "id": "620f77a780ab9a69201c7642",
+  "createdBy": "demo-user",
+  "createdAt": "Feb 18, 2022 10:40:39 AM",
+  "sharedWith": [
+    {
+      "userGroupId": "PUBLIC",
+      "accessLevel": "READ_ONLY"
+    },
+    {
+      "userGroupId": "demo-user"
+    }
+  ],
+  "cubeId": "620f77a680ab9a69201c7641",
+  "datasetId": "620f77359affa228c408e3b0",
+  "modelId": "620f77a515d5970cc6172e36",
+  "dataProcessingConfig": {
+    "steps": [
+      {
+        "operation": "RESCALE"
+      }
+    ]
+  },
+  "trainingConfig": {
+    "batch_size": 100,
+    "infer": {
+      "lkh_weight": 1,
+      "min_eps": 0.001,
+      "nlayers": 10,
+      "lfsteps": 6,
+      "momentum_std": 0.1,
+      "initial_log_eps": -3,
+      "initial_ei_prior_mean": 0,
+      "initial_ei_prior_std": 1,
+      "stop_gradient_pot": false
+    },
+    "train": {
+      "trn_weight": 1,
+      "optimizer": {
+        "learning_rate_init": 5e-3,
+        "learning_rate_change_points": 200,
+        "learning_rate_change_values": 0.99,
+        "learning_rate_inf_init": 5e-3,
+        "learning_rate_inf_change_points": 200,
+        "learning_rate_inf_change_values": 0.99
+      },
+      "max_iter": 500,
+      "save_period": 50,
+      "logging_period": 10
+    },
+    "dataloader": {
+      "trn_tst_split": 1.0,
+      "sampler": {
+        "type": "PlainSampler",
+        "args": {
+          "shuffle": true
+        }
+      }
+    }
+  },
+  "evaluationConfig": {
+    "method": "EVAL_DEFAULT",
+    "trainingJobId": "620f77a7bbccf1227d2d4218",
+    "datasetId": "620f77359affa228c408e3b0",
+    "taskIds": [
+      "620f77a79affa228c408e3b1",
+      "620f77a79affa228c408e3b2",
+      "620f77a79affa228c408e3b3"
+    ],
+    "metrics": [
+      {
+        "type": "AVERAGE_LOG_LOSS"
+      },
+      {
+        "type": "AVERAGE_ACCURACY"
+      },
+      {
+        "type": "AVERAGE_PERCENTAGE_ERROR"
+      },
+      {
+        "type": "AVERAGE_ERROR"
+      },
+      {
+        "type": "PR_CURVE"
+      },
+      {
+        "type": "ROC_CURVE"
+      }
+    ]
+  }
+}
